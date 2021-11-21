@@ -1,15 +1,15 @@
-# .vimrc configuration
+" .vimrc configuration
 
-# Enable lines counter
+" Enable lines counter
 set number
 
-# Enable syntax highliting
+" Enable syntax highliting
 syntax on
 
-# Enable mouse in vim windows
+" Enable mouse in vim windows
 set mouse=a
 
-# Remap keys for switching beetween tabs
+" Remap keys for switching beetween tabs
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
 nnoremap <C-j> :tabprevious<CR>
