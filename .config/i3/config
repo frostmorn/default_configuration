@@ -105,6 +105,11 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
+
+bindsym Print exec scrot -F "$HOME/Pictures/Screenshots/\$w x \$h %d-%m-%Y %H\:%M\:%S"
+bindsym Control+Print exec scrot -u -F "$HOME/Pictures/Screenshots/\$w x \$h %d-%m-%Y %H\:%M\:%S"
+
+
 # focus the child container
 #bindsym $mod+d focus child
 
@@ -123,7 +128,7 @@ set $ws10mail "10:Mail"
 
 # assign workspaces for apps
 # WM_CLASS found by xprop command
-assign [class="Pcmanfm"] $ws1fileview
+assign [class="Pcmanfm" instance="pcmanfm"] $ws1fileview
 assign [class="Transmission"] $ws1fileview
 
 assign [class="Evince"] $ws2books
@@ -134,13 +139,13 @@ assign [class="mpv"] $ws8movie
 assign [class="Rhythmbox"] $ws9music
 
 assign [class="Thunderbird"]  $ws10mail
-assign [class="TelegramDesktop"] $ws10mail
+assign [class="TelegramDesktop" instance="telegram-desktop"] $ws10mail
 assign [class="discord"] $ws10mail
 
 # For a some kind a purpose it doesn't work for specific
 # app. Possibly WM_NAME is setting after an actual app
 # statup which causes us to stuck here.
-#assign [title="toxic"] $ws10mail
+assign [class="Toxic"] $ws10mail
 
 # starting default apps
 exec thunderbird
@@ -149,9 +154,12 @@ exec discord
 exec transmission-gtk
 exec rhythmbox
 
+# Selecting random wallpaper
+exec sh -c "feh --bg-fill $(find $HOME/Pictures/Wallpapers -type f | shuf -n 1)"
+
 # Without calling by this way, app even isn't visible :D
 # but it works, somewhere in a silent mode...
-# exec kitty -e "toxic"
+exec kitty --class="Toxic" -e "toxic"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1fileview
