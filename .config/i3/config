@@ -117,7 +117,7 @@ bindsym Control+Print exec scrot -u -F "$HOME/Pictures/Screenshots/\$w x \$h %d-
 # We use variables to avoid repeating the names in multiple places.
 set $ws1fileview "1:Files"
 set $ws2books "2:Books"
-set $ws3 "3"
+set $ws3drawing "3:Drawing"
 set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
@@ -126,6 +126,9 @@ set $ws8movie "8:Movie"
 set $ws9music "9:Music"
 set $ws10mail "10:Mail"
 
+# disable floating windows for specific applications
+for_window [class="Inkscape"] floating disable
+
 # assign workspaces for apps
 # WM_CLASS found by xprop command
 assign [class="Pcmanfm" instance="pcmanfm"] $ws1fileview
@@ -133,6 +136,10 @@ assign [class="Transmission"] $ws1fileview
 
 assign [class="Evince"] $ws2books
 assign [class="FBReader"] $ws2books
+
+assign [class="Inkscape"] $ws3drawing
+assign [class="Gimp-*"] $ws3drawing
+assign [class="Blender"] $ws3drawing
 
 assign [class="mpv"] $ws8movie
 
@@ -164,7 +171,7 @@ exec kitty --class="Toxic" -e "toxic"
 # switch to workspace
 bindsym $mod+1 workspace number $ws1fileview
 bindsym $mod+2 workspace number $ws2books
-bindsym $mod+3 workspace number $ws3
+bindsym $mod+3 workspace number $ws3drawing
 bindsym $mod+4 workspace number $ws4
 bindsym $mod+5 workspace number $ws5
 bindsym $mod+6 workspace number $ws6
@@ -176,7 +183,7 @@ bindsym $mod+0 workspace number $ws10mail
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1fileview
 bindsym $mod+Shift+2 move container to workspace number $ws2books
-bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+3 move container to workspace number $ws3drawing
 bindsym $mod+Shift+4 move container to workspace number $ws4
 bindsym $mod+Shift+5 move container to workspace number $ws5
 bindsym $mod+Shift+6 move container to workspace number $ws6
