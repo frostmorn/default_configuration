@@ -47,9 +47,13 @@ bindsym $mod+Return exec i3-sensible-terminal
 # kill focused window
 bindsym $mod+Shift+q kill
 
+
+bindsym $mod+z exec transset-df -a --dec 0.02
+bindsym $mod+x exec transset-df -a --inc 0.02
+
 # start pcmanfm in daemon mode
 exec pcamnfm -d
-
+exec xcompmgr -c 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec --no-startup-id dmenu_run
 # A more modern dmenu replacement is rofi:
@@ -106,8 +110,8 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 
-bindsym Print exec scrot -F "$HOME/Pictures/Screenshots/\$w x \$h %d-%m-%Y %H\:%M\:%S"
-bindsym Control+Print exec scrot -u -F "$HOME/Pictures/Screenshots/\$w x \$h %d-%m-%Y %H\:%M\:%S"
+bindsym Print exec scrot -F "$HOME/Pictures/Screenshots/\$w_x_\$h_%d-%m-%Y_%H\:%M\:%S.png"
+bindsym Control+Print exec scrot -u -F "$HOME/Pictures/Screenshots/\$w_x_\$h_%d-%m-%Y_%H\:%M\:%S.png"
 
 
 # focus the child container
@@ -131,7 +135,7 @@ for_window [class="Inkscape"] floating disable
 
 # assign workspaces for apps
 # WM_CLASS found by xprop command
-assign [class="Pcmanfm" instance="pcmanfm"] $ws1fileview
+assign [class="Pcmanfm"] $ws1fileview
 assign [class="Transmission"] $ws1fileview
 
 assign [class="Evince"] $ws2books
@@ -140,6 +144,8 @@ assign [class="FBReader"] $ws2books
 assign [class="Inkscape"] $ws3drawing
 assign [class="Gimp-*"] $ws3drawing
 assign [class="Blender"] $ws3drawing
+assign [class="Dia"] $ws3drawing
+
 
 assign [class="mpv"] $ws8movie
 
@@ -147,16 +153,18 @@ assign [class="Rhythmbox"] $ws9music
 
 assign [class="Thunderbird"]  $ws10mail
 assign [class="TelegramDesktop" instance="telegram-desktop"] $ws10mail
+assign [class="Pidgin"]  $ws10mail
 assign [class="discord"] $ws10mail
 
 # For a some kind a purpose it doesn't work for specific
 # app. Possibly WM_NAME is setting after an actual app
 # statup which causes us to stuck here.
-assign [class="Toxic"] $ws10mail
+assign [instance="Toxic"] $ws10mail
 
 # starting default apps
 exec thunderbird
-exec telegram-desktop
+#exec telegram-desktop
+exec pidgin
 exec discord
 exec transmission-gtk
 exec rhythmbox
@@ -166,7 +174,7 @@ exec sh -c "feh --bg-fill $(find $HOME/Pictures/Wallpapers -type f | shuf -n 1)"
 
 # Without calling by this way, app even isn't visible :D
 # but it works, somewhere in a silent mode...
-exec kitty --class="Toxic" -e "toxic"
+exec eval urxvt -name "Toxic" -e "toxic"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1fileview

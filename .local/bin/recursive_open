@@ -1,0 +1,5 @@
+#!/usr/bin/sh
+
+#vim recursive open directory
+Terminal="eval urxvt"
+for i in $(find . -type f -not -empty -not -path '*/.*'); do  ${Terminal} -e "vim $i" & done
